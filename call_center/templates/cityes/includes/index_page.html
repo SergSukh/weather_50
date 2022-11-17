@@ -1,0 +1,51 @@
+{% block content %}
+    <table class="table table-bordered border-primary">
+        <thead>
+            <tr>
+                <th score="col">
+                    Город:
+                </th>
+                <th score="col">
+                    Температура:
+                </th>
+                <th score="col">
+                    Облачность:
+                </th>
+                <th score="col">
+                    Ветер:
+                </th>
+                <th score="col">
+                   Влажность:
+                </th>
+                <th score="col">
+                    Время обновления:
+                 </th>
+ 
+            </tr>
+        </thead>
+        <tbody>
+        {% for city in city_list %}
+            <tr>
+                    <td>
+                        {{city.city}}
+                    </td>
+                    <td>
+                        {{city.temp }}
+                    </td>
+                    <td>
+                        {{ city.cloud }}
+                    </td>
+                    <td>
+                        {{ city.wind }}
+                    </td>
+                    <td>
+                        {{ city.humidity }}
+                    </td>
+                    <th score="col">
+                        {{city.date_time }}
+                    </th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %} 

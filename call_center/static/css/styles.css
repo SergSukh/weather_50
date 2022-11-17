@@ -1,0 +1,85 @@
+.user-decorated {
+    font-size: small;
+    padding: 2px 6px;
+    border-radius: 7px;
+}
+
+ul {
+    list-style: none;
+}
+
+.my-info,
+.nav-authentificated {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.my-form,
+.user-authentificated {
+    justify-content: space-between;
+    padding: 3px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.active,
+.my-form:hover,
+.my-form:active,
+.user-authentificated:active,
+.user-authentificated:hover {
+    color: rgb(135, 206, 250);
+    background-color: #fff;
+    border: 1px solid rgb(135, 206, 250);
+}
+
+.my-link:not(:last-child)
+.main-info:not(:last-child),
+.my-form:not(:last-child),
+.user-authentificated:not(:last-child) {
+    margin-right: 25px;
+}
+
+.h1,
+.h3 {
+    text-align: center;
+}
+
+.my-links,
+.main-row {
+    display: flex;
+    flex-direction: row;
+    flex-flow: nowrap;
+}
+
+.main-info {
+    flex: 1 1 calc(100% / 2 - 25px);
+}
+
+.my-photo {
+    max-width: 10%;
+}
+
+
+.my-link {
+    flex: 1 1 calc(100% / 4 - 75px)
+}
+
+.link-iteams {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.link-iteam {
+    display: inline-block;
+}
+
+.nav-user {
+    color:rgb(6, 10, 243);
+}
+
+.main-iteams {
+    max-width: 150px;
+}
