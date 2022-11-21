@@ -18,7 +18,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         cityes = City.objects.all()[:50]
         for city in cityes:
-            print(city)
             data = {
                 'q': city.name,
                 'units': 'metric',

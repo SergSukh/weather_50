@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import City, Temp, Weather
+from .models import City, Weather
 
 
 @admin.register(City)
@@ -11,5 +11,7 @@ class CityAdmin(admin.ModelAdmin):
 
 @admin.register(Weather)
 class WeatherAdmin(admin.ModelAdmin):
-    list_display = ['city', 'timestamp', 'temp', 'wind', 'cloud', 'preassure', 'humidity']
+    list_display = [
+        'city', 'timestamp', 'temp', 'wind', 'cloud', 'preassure', 'humidity'
+    ]
     search_fields = ['city']

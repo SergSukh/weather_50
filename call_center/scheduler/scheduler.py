@@ -1,6 +1,7 @@
 import logging
 import os
-import sys
+import time
+from sys import stdout
 
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -12,6 +13,14 @@ from weather.models import City, Cloud, Temp, Weather, Wind
 load_dotenv()
 
 scheduler = BackgroundScheduler(settings.SCHEDULER_CONFIG)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler(stdout)
+formatter = logging.Formatter(
+    '%(asctime)s %(levelname)s %(message)s'
+)
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 API = os.getenv('API')
 URL = 'https://api.openweathermap.org/data/2.5/weather'
@@ -26,11 +35,13 @@ def get_weather_city():
             'units': 'metric',
             'appid': API
         }
-
-        try:
-            resp = requests.get(URL, params=data).json()
-        except Exception as e:
-            print(e)
+        resp = requests.get(URL, params=data).json()
+        while resp.status_code != 200:
+            try:
+                time.sleep(30)
+                resp = requests.get(URL, params=data).json()
+            except Exception as e:
+                logger.debug(f'weather API has error responce: {e}')
         temp = Temp.objects.get_or_create(
             temp=resp['main']['temp'],
             feels_like=resp['main']['feels_like'],
@@ -61,4 +72,3 @@ def start():
         logging.getLogger('apscheduler').setLevel(logging.DEBUG)
     register_events(scheduler)
     scheduler.start()
-    print("Scheduler started...", file=sys.stdout)

@@ -14,7 +14,9 @@ os.chdir(path)
 
 
 with open('csvData.csv', encoding="utf-8") as csvfile:
-    reader = csv.DictReader(csvfile, fieldnames=['rank', 'city', 'country', 'pop2022'])
+    reader = csv.DictReader(
+        csvfile, fieldnames=['rank', 'city', 'country', 'pop2022']
+    )
     city = (City(
         name=_['city'],
         state=_['country'],
@@ -23,4 +25,10 @@ with open('csvData.csv', encoding="utf-8") as csvfile:
     City.objects.bulk_create(city)
 
 get_weather_city()
-scheduler.add_job(get_weather_city, 'interval', minutes=60, name='get_weather', jobstore='default')
+scheduler.add_job(
+    get_weather_city,
+    'interval',
+    minutes=60,
+    name='get_weather',
+    jobstore='default'
+)
